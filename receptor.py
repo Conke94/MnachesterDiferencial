@@ -4,10 +4,24 @@ from tkinter import ttk
 import tkinter as tk
 import socket
 
-# def diferentialManchesterDecoding(data):
-#     decoded_signal = []
-#     print(data)
-#     return decoded_signal
+def diferentialManchesterDecoding(encoded_signal):
+    decoded_signal = []
+
+    current_level = encoded_signal[0]
+
+    for i in range(0, len(encoded_signal), 2):
+        first_bit = encoded_signal[i]
+        second_bit = encoded_signal[i + 1]
+
+        if first_bit == current_level:
+            decoded_signal.append('1')
+        else:
+            decoded_signal.append('0')
+
+        current_level = second_bit
+
+    print(decoded_signal)
+    return decoded_signal
 
 def generateGraph(data):
     graph_data = []
@@ -32,7 +46,8 @@ def generateGraph(data):
         yaxis_title='Nível de Sinal',
         yaxis=dict(
             tickvals=[0, 1],
-            ticktext=['Low (0)', 'High (1)']
+            ticktext=['Low (0)', 'High (1)'],
+            autorange='reversed' 
         )
     )
 
