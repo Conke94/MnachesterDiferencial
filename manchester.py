@@ -15,7 +15,7 @@ def controller(event):
 
 def encrypt(str_inserted):
     message = str_inserted
-    key = 1
+    key = 7
     characters = 'AÁÀÃÂaáàãâBbCcçDdEÉÈÊeéèêFfGgHhIÍÌÎiíìîJjKkLlMmNnOÓÒÕÔoóòõôPpQqRrSsTtUÚÙÛuúùûVvWwXxYyZz'
     encrypted_value = ''
     for character in message:
