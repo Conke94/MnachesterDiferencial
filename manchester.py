@@ -23,7 +23,8 @@ def generateGraph(bits):
         yaxis_title='Nível de Sinal',
         yaxis=dict(
             tickvals=[0, 1],
-            ticktext=['Low (0)', 'High (1)']
+            ticktext=['Low (0)', 'High (1)'],
+            autorange='reversed' 
         )
     )
 
