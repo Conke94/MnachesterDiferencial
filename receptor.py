@@ -11,7 +11,17 @@ def controller():
     original_signal = diferentialManchesterDecoding(encoded_signal)
     encrypted_text = binaryToString(original_signal)
     original_text = decrypt(encrypted_text)
-    # showOnScreen(text)
+    formatted_message = (
+    f"String Recebida Codificada = {list(encoded_signal)}\n"
+    f"Mensagem em Binário = {list(original_signal)}\n"
+    f"Mensagem Encriptada = {encrypted_text}\n"
+    f"Mensagem Recebida = {original_text}"
+    )
+
+    janela = tk.Tk()
+    label = tk.Label(janela, text=formatted_message, justify='left')
+    label.pack()
+    janela.mainloop()
 
 def receiveMessage(host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
