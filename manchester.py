@@ -16,7 +16,7 @@ def controller(event):
 def encrypt(str_inserted):
     message = str_inserted
     key = 1
-    characters = 'AaáàãâBbCcçDdEeéèêFfGgHhIiíìîJjKkLlMmNnOoóòõôPpQqRrSsTtUuúùûVvWwXxYyZz'
+    characters = 'AÁÀÃÂaáàãâBbCcçDdEÉÈÊeéèêFfGgHhIÍÌÎiíìîJjKkLlMmNnOÓÒÕÔoóòõôPpQqRrSsTtUÚÙÛuúùûVvWwXxYyZz'
     encrypted_value = ''
     for character in message:
         if character in characters:
@@ -33,8 +33,7 @@ def stringToBits(str):
     string_in_bits = []
     for letter in str:
         ascii_value = ord(letter)
-        binary_value = bin(ascii_value)[2:]
-        binary_value.zfill(8)
+        binary_value = bin(ascii_value)[2:].zfill(8)
         for bit in binary_value:
             string_in_bits.append(bit)
     return string_in_bits
