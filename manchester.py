@@ -10,7 +10,7 @@ def controller(event):
     binary_value = stringToBits(encrypted_value)
     result_label.config(text=f"Mensagem escrita: {str_inserted}\nMensagem encriptada: {encrypted_value}\nMensagem em binário: {binary_value}\nString Codificação ManchesterD: {encoded_string}")
     encoded_signal = differentialManchesterEncoding(binary_value)
-    generateGraph(encoded_signal)
+    generateGraph(encoded_signal) 
     sendMessage(encoded_signal, 'localhost')
 
 def encrypt(str_inserted):

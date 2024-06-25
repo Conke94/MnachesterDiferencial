@@ -11,7 +11,7 @@ def controller():
     original_signal = diferentialManchesterDecoding(encoded_signal)
     encrypted_text = binaryToString(original_signal)
     original_text = decrypt(encrypted_text)
-    formatted_message = ( 
+    formatted_message = (  
     f"String Recebida Codificada = {list(encoded_signal)}\n"
     f"Mensagem em Binário = {list(original_signal)}\n"
     f"Mensagem Encriptada = {encrypted_text}\n"
