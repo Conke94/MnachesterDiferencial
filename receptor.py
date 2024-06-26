@@ -11,16 +11,37 @@ def controller():
     original_signal = diferentialManchesterDecoding(encoded_signal)
     encrypted_text = binaryToString(original_signal)
     original_text = decrypt(encrypted_text)
+
     formatted_message = (  
-    f"String Recebida Codificada = {list(encoded_signal)}\n"
-    f"Mensagem em Binário = {list(original_signal)}\n"
-    f"Mensagem Encriptada = {encrypted_text}\n"
-    f"Mensagem Recebida = {original_text}"
+        f"Mensagem Recebida = {original_text}\n\n"
+        f"Mensagem Encriptada = {encrypted_text}\n\n"
+        f"Mensagem em Binário = {list(original_signal)}\n\n"
+        f"String Recebida Codificada = {list(encoded_signal)}\n"
     )
 
     janela = tk.Tk()
-    label = tk.Label(janela, text=formatted_message, justify='left')
-    label.pack()
+    janela.geometry("1280x400")
+
+    frame = tk.Frame(janela)
+    frame.pack(expand=True, fill='both')
+    scrollbar = tk.Scrollbar(frame)
+    scrollbar.pack(side='right', fill='y')
+
+    text_widget = tk.Text(
+        frame, 
+        wrap='word', 
+        font=('Arial', 12, 'bold'), 
+        bg='lightyellow', 
+        fg='blue', 
+        padx=10, 
+        pady=10,
+        yscrollcommand=scrollbar.set
+    )
+    text_widget.pack(expand=True, fill='both')
+
+    scrollbar.config(command=text_widget.yview)
+    text_widget.insert('1.0', formatted_message)
+    text_widget.config(state='disabled')
     janela.mainloop()
 
 def receiveMessage(host, port):

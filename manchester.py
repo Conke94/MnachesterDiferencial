@@ -8,8 +8,19 @@ def controller(event):
     str_inserted = entry.get()
     encrypted_value = encrypt(str_inserted)
     binary_value = stringToBits(encrypted_value)
-    result_label.config(text=f"Mensagem escrita: {str_inserted}\nMensagem encriptada: {encrypted_value}\nMensagem em binário: {binary_value}\nString Codificação ManchesterD: {encoded_string}")
     encoded_signal = differentialManchesterEncoding(binary_value)
+    formatted_message = (  
+        f"Mensagem escrita: {str_inserted}\n\n"
+        f"Mensagem encriptada: {encrypted_value}\n\n"
+        f"Mensagem em binário: {binary_value}\n\n"
+        f"String Codificação ManchesterD: {encoded_signal}\n"
+    )
+    
+    result_text.config(state='normal')  
+    result_text.delete('1.0', tk.END)  
+    result_text.insert(tk.END, formatted_message)
+    result_text.config(state='disabled')  
+
     generateGraph(encoded_signal) 
     sendMessage(encoded_signal, 'localhost')
 
@@ -97,7 +108,6 @@ def sendMessage(message, host, port=1234):
         binary_string = ''.join(message)  # Converte a lista de bits em uma string
         message_bytes = binary_string.encode('utf-8')  # Converte a string em bytes
         client_socket.sendall(message_bytes)
-        print(f'Mensagem enviada: {message_bytes}')
     finally:
         client_socket.close()
 
@@ -108,6 +118,23 @@ if __name__ == "__main__":
     entry = ttk.Entry(window, width=40)
     entry.pack()
     entry.bind('<Return>', controller)
-    result_label = ttk.Label(window, text="")
-    result_label.pack(pady=10)
+    frame = ttk.Frame(window)
+    frame.pack(expand=True, fill='both', pady=10)
+
+    scrollbar = ttk.Scrollbar(frame)
+    scrollbar.pack(side='right', fill='y')
+
+    result_text = tk.Text(
+        frame, 
+        wrap='word', 
+        font=('Arial', 12, 'bold'), 
+        bg='lightyellow', 
+        fg='blue', 
+        padx=10, 
+        pady=10, 
+        yscrollcommand=scrollbar.set
+    )
+    result_text.pack(expand=True, fill='both')
+    scrollbar.config(command=result_text.yview)
+    result_text.config(state='disabled')
     window.mainloop()
