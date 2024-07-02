@@ -22,7 +22,7 @@ def controller(event):
     result_text.config(state='disabled')  
 
     generateGraph(encoded_signal) 
-    sendMessage(encoded_signal, 'localhost')
+    sendMessage(encoded_signal, '10.181.8.228')
 
 def encrypt(str_inserted):
     message = str_inserted
@@ -68,7 +68,7 @@ def generateGraph(encoded_signal):
         yaxis=dict(
             tickvals=[0, 1],
             ticktext=['Low (0)', 'High (1)'],
-            autorange='reversed' 
+            # autorange = 'reversed'
         )
     )
 
@@ -97,7 +97,7 @@ def differentialManchesterEncoding(bits):
                 encoded_signal.append('0')
                 encoded_signal.append('1')
                 current_level = '1'
-    
+
     return encoded_signal
 
 def sendMessage(message, host, port=1234):
